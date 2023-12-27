@@ -27,14 +27,9 @@
                 <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                 <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option selected value="" >Choose a type</option>
-                  <option value="text">Text</option>
-                  <option value="select">Dropdown</option>
-                  <option value="checkbox">Checkbox</option>
-                  <option value="radio">Radio</option>
-                  <option value="date">Date</option>
-                  <option value="email">Email</option>
-                  <option value="number">Number</option>
-                  <option value="password">Password</option>
+                  @foreach (SELECT_OPTION as $key=>$item)
+                  <option value="{{$key}}">{{$item}}</option>
+                  @endforeach
                 </select>
                 @error('type')
                     <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"> {{$message}}</p>

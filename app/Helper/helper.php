@@ -9,5 +9,6 @@ define('SELECT_OPTION',[
     'date'=>    'Date',
     'email'=>   'Email',
     'number'=>  'Number',
-    'password'=>'Password'
+    'password'=>'Password',
+    'textarea'=>'Textarea',
 ]);

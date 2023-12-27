@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreOrganizationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,14 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('category') ? $this->route('category')->id : null;
+        $organizationsId = $this->route('organizations') ? $this->route('organizations')->id : null;
         return [
             'name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('categories', 'name')->ignore($categoryId),
+                Rule::unique('organizations', 'name')->ignore($organizationsId),
             ],
-            'organization_id'=>['required'],
             'description' => ['required'],
         ];
     }

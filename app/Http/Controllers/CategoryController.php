@@ -2,8 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Services\CategoryServices;
+use App\Models\Organization;
 use Illuminate\Http\Request;
+use App\Services\CategoryServices;
 use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
@@ -16,7 +17,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        $organization = Organization::all();
+        return view('categories.create',['organization'=>$organization]);
     }
 
     public function store(StoreCategoryRequest $request,CategoryServices $categoryServices)
@@ -24,12 +26,13 @@ class CategoryController extends Controller
         $categoryServices->store(
             $request->validated()
         );
-        return redirect()->back()->with(['success' => 'Category created']);
+        return redirect()->route('categories.index')->with(['success' => 'Category created']);
     }
 
     public function edit(Category $category)
     {
-        return view('categories.edit', ['category' => $category]);
+        $organization = Organization::all();
+        return view('categories.edit', ['category' => $category,'organization'=>$organization]);
     }
 
     public function update(StoreCategoryRequest $request, Category $category,CategoryServices $categoryServices)

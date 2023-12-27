@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="py-12">
-       
+
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             @if ($fields->count() <= 0)
                 <div class="mb-16 bg-white border border-gray-100 rounded-xl">
@@ -15,27 +15,34 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Category name
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Description
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
+                            <th scope="col" class="px-6 py-3">OrderID</th>
+                            <th scope="col" class="px-6 py-3">Template name</th>
+                            <th scope="col" class="px-6 py-3">Name</th>
+                            <th scope="col" class="px-6 py-3">Label</th>
+                            <th scope="col" class="px-6 py-3">Type</th>
+                            <th scope="col" class="px-6 py-3">Options</th>
+                            <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($fields as $item)
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <td class="px-6 py-4">{{$item->order}}</td>
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                   {{$item->name}}
+                                   {{$item->formTemplate->title}}
                                 </th>
+                                <td class="px-6 py-4">{{$item->name}}</td>
+                                <td class="px-6 py-4">{{$item->label}}</td>
+                                <td class="px-6 py-4">{{$item->type}}</td>
                                 <td class="px-6 py-4">
-                                    {{$item->description}}
+                                    @php
+                                        $options = $item->options ? json_decode($item->options) : [];
+                                    @endphp
+                                    @foreach ($options as $key=>$option)
+                                    {{ $option }} @if ($key < count($options) - 1),@endif
+                                    @endforeach
+
                                 </td>
-                            
                                 <td class="px-6 py-4">
                                     <div class="flex items-center justify-center p-5">
                                         <a class="inline-flex w-8 h-8 mr-2 items-center justify-center bg-green-500 hover:bg-green-600 rounded-2xl"
@@ -47,7 +54,7 @@
                                                     d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z"
                                                     fill="rgba(255,255,255,1)"/>
                                             </svg>
-                                        </a>                                    
+                                        </a>
                                         <button data-delete-route="{{ route('fields.destroy', $item->id) }}"class="delete-item-btn inline-flex w-8 h-8 items-center justify-center bg-red-500 hover:bg-red-600 rounded-2xl">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
                                                 height="20">

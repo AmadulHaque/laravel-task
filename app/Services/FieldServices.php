@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Field;
 use Illuminate\Support\Facades\DB;
-class FieldServices  
+class FieldServices
 {
     public function store(array $data, $image = null)
     {
@@ -21,7 +21,7 @@ class FieldServices
     }
 
 
-    public function destroy(Field $field)
+    public function destroy($field)
     {
         $field->update([
             'deleted_at' => now()

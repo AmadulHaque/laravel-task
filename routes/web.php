@@ -5,6 +5,7 @@ use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FormTemplateController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\FormSubmissionController;
 
 /*
@@ -35,9 +36,13 @@ Route::middleware('auth')->group(function () {
     // crud opration
     Route::resource('categories', CategoryController::class);
     Route::resource('form-templates', FormTemplateController::class);
-    Route::resource('form-submissions', FormSubmissionController::class);
     Route::resource('fields', FieldsController::class);
-    
+    Route::resource('organization', OrganizationController::class);
+
+
+    Route::get('form/submit/{id}', [FormSubmissionController::class, 'showForm'])->name('form.create');
+    Route::post('form/{formTemplateId}/submit', [FormSubmissionController::class, 'submitForm'])->name('form.store');
+    Route::get('form/{formTemplateId}/submitted-data', [FormSubmissionController::class, 'showSubmittedData'])->name('form.submitted_data');
 
 
 });

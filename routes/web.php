@@ -42,7 +42,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('form/submit/{id}', [FormSubmissionController::class, 'showForm'])->name('form.create');
     Route::post('form/{formTemplateId}/submit', [FormSubmissionController::class, 'submitForm'])->name('form.store');
-    Route::get('form/{formTemplateId}/submitted-data', [FormSubmissionController::class, 'showSubmittedData'])->name('form.submitted_data');
+
+    Route::get('/submitted-data', [FormSubmissionController::class, 'AllSubmittedData'])->name('all.submitted.data');
+    Route::get('/forms', [FormTemplateController::class, 'forms'])->name('forms.index');
+
 
 
 });

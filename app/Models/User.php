@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
-    public function role() {
-        return $this->belongsTo(Role::class);
-    }
-    
     public function formSubmissions() {
         return $this->hasMany(FormSubmission::class);
     }
@@ -31,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**

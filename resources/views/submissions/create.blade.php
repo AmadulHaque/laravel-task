@@ -2,7 +2,7 @@
 
     <div class="py-12">
 
-
+        <h2 class="text-center text-[25px]" >{{$formTemplate->title}}</h2>
         <form class="max-w-md mx-auto" method="POST" action="{{ route('form.store', $formTemplate->id) }}" >
             @csrf
 

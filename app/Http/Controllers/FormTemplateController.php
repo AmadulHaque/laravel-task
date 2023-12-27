@@ -15,6 +15,17 @@ class FormTemplateController extends Controller
         return view('form-templates.index', ['formTemplate'=>$formTemplate]);
     }
 
+    public function forms(Request $request)
+    {
+        $categories = Category::all();
+        $query = FormTemplate::query();
+        if ($request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+        $all_templates = $query->get();
+        return view('form-templates.forms', ['all_templates'=>$all_templates,'categories'=>$categories]);
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -28,7 +39,7 @@ class FormTemplateController extends Controller
         );
         return redirect()->route('form-templates.index')->with(['success' => 'Form Template created']);
     }
-    
+
 
     public function edit(FormTemplate $FormTemplate)
     {
